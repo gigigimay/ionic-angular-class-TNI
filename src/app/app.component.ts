@@ -30,7 +30,12 @@ export class AppComponent {
       title: 'คอร์สเรียน',
       url: '/course',
       icon: 'star'
-    }
+    },
+    {
+      title: 'ข่าวสาร',
+      url: '/news',
+      icon: 'paper'
+    },
   ];
 
   constructor(
