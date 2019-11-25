@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>ติดต่อเรา</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-label>
+    ชื่อบริษัท: {{companyName}}
+  </ion-label>
+  <ion-label>
+    ชื่อเว็บไซต์: <a href="https://www.tni.ac.th/">{{companyWebsite}}</a>
+  </ion-label>
+  <ion-button expand="full" shape="round" color="tertiary" routerLink="/about" routerDirection="back">
+    <ion-icon slot="start" name="contact"></ion-icon>
+    ปิดหน้าเกี่ยวกับเรา
+  </ion-button>
+  <ion-button expand="full" shape="round" color="medium" (click)="goToHome()">
+    <ion-icon slot="start" name="home"></ion-icon>
+    เปิดหน้าแรก
+  </ion-button>
+</ion-content>

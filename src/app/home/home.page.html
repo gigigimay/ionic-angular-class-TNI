@@ -1,0 +1,73 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>
+            หน้าหลัก
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <ion-slides pager="true" [options]="{effect: 'flip', autoplay: true}">
+                    <ion-slide>
+                        <ion-img src="https://picsum.photos/500/300?random"></ion-img>
+                    </ion-slide>
+
+                    <ion-slide>
+                        <ion-img class="js-img" src="https://picsum.photos/500/301?random"></ion-img>
+                    </ion-slide>
+
+                    <ion-slide>
+                        <ion-img class="js-img" src="https://picsum.photos/500/302?random"></ion-img>
+                    </ion-slide>
+                </ion-slides>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="6">
+                <ion-button fill="outline" expand="block" size="medium" color="tertiary">
+                    <ion-icon slot="start" name="home"></ion-icon>
+                    หน้าหลัก
+                </ion-button>
+            </ion-col>
+
+            <ion-col size="6">
+                <ion-button fill="outline" expand="block" size="medium" color="danger">
+                    <ion-icon slot="start" name="person"></ion-icon>
+                    เกี่ยวกับ
+                </ion-button>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="8">
+                <ion-button fill="outline" expand="block" size="medium" color="success">
+                    <ion-icon slot="start" name="information-circle" style="color:#4200bd"></ion-icon>
+                    ติดต่อเรา
+                </ion-button>
+            </ion-col>
+
+            <ion-col size="4">
+                <ion-button fill="outline" expand="block" size="medium" color="secondary">
+                    <ion-icon slot="start" name="settings"></ion-icon>
+                </ion-button>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col>
+                <ion-button fill="outline" expand="block" size="medium">
+                    <ion-icon slot="end" name="heart" style="color:#ff528b"></ion-icon>
+                    คอร์สเรียน
+                </ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+</ion-content>
