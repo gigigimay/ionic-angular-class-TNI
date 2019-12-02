@@ -1,12 +1,49 @@
 <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title>ข่าวสาร</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      ข่าว
+      <ion-badge color="primary">{{totalResults}}</ion-badge>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content>
+  <ion-virtual-scroll [items]="articles" approxItemHeight="440px">
+    <ion-card *virtualItem="let atc; let itemBounds = bounds;" mode="">
+      <div *ngIf="atc.urlToImage" style="height: 100px; overflow: hidden;">
+          <ion-img [src]="atc.urlToImage"></ion-img>
+      </div>
+      <ion-card-header>
+        <ion-card-subtitle>{{atc.author}}</ion-card-subtitle>
+        <ion-card-title>{{atc.title}}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        {{atc.description}}
+      </ion-card-content>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <div>
+              <ion-icon slot="start" name="person"></ion-icon>
+              <ion-label>{{atc.source.name}}</ion-label>
+            </div>
+          </ion-col>
+          <ion-col>
+            <div class="ion-text-end">
+              <ion-icon slot="start" name="calendar"></ion-icon>
+              <ion-label>{{atc.publishedAt|date:'dd/M/yyyy'}}</ion-label>
+            </div>
+          </ion-col>
+
+        </ion-row>
+      </ion-grid>
+
+    </ion-card>
+  </ion-virtual-scroll>
 
 </ion-content>

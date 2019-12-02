@@ -16,6 +16,7 @@ export class CourseService {
   constructor(private http: HttpClient) { }
 
   // method for retreiving data from backend
+  // return Observable<Course[]>
   getCourse(): Observable<Course[]> {
     return this.http.get<Course[]>(this.apiUrl);
   }
