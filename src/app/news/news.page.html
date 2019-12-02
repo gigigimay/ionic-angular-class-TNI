@@ -12,7 +12,7 @@
 
 <ion-content>
   <ion-virtual-scroll [items]="articles" approxItemHeight="440px">
-    <ion-card *virtualItem="let atc; let itemBounds = bounds;" mode="">
+    <ion-card *virtualItem="let atc; let itemBounds = bounds;" mode="ios">
       <div *ngIf="atc.urlToImage" style="height: 100px; overflow: hidden;">
           <ion-img [src]="atc.urlToImage"></ion-img>
       </div>
