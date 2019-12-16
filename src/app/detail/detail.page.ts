@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 import { ActivatedRoute } from '@angular/router';
 import { CourseService } from '../course.service';
@@ -16,7 +17,8 @@ export class DetailPage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private courseService: CourseService
+    private courseService: CourseService,
+    private navController: NavController,
   ) {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.title = this.route.snapshot.paramMap.get('title');
@@ -30,4 +32,7 @@ export class DetailPage implements OnInit {
     );
   }
 
+  itemSelected(ch) {
+    this.navController.navigateForward(['/youtube', { url: ch.ch_url, title: ch.ch_title }]);
+  }
 }
