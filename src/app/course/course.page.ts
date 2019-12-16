@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 import { CourseService } from '../course.service'; // model
 import { Course } from '../models/course'; // service
@@ -16,7 +17,10 @@ export class CoursePage implements OnInit, OnDestroy {
   sub: Subscription;
 
   // (injection) declare service
-  constructor(private courseService: CourseService) { }
+  constructor(
+    private courseService: CourseService,
+    private navController: NavController,
+  ) { }
 
   ngOnInit() {
     // subscribe the data from service
@@ -30,5 +34,12 @@ export class CoursePage implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+  }
+
+  itemSelected(c: Course) {
+    this.navController.navigateForward(['/detail', {
+      id: c.id,
+      title: c.c_title
+    }]);
   }
 }

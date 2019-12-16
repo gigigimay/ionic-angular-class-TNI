@@ -12,6 +12,7 @@ import { Course } from './models/course';
 export class CourseService {
 
   apiUrl = 'https://codingthailand.com/api/get_courses.php';
+  apiUrl2 = 'https://codingthailand.com/api/get_course_detail.php?';
 
   constructor(private http: HttpClient) { }
 
@@ -19,5 +20,11 @@ export class CourseService {
   // return Observable<Course[]>
   getCourse(): Observable<Course[]> {
     return this.http.get<Course[]>(this.apiUrl);
+  }
+
+  // retreive cource detail data, instead of using model, here we use `any` (we are lazy!)
+  getCourseDetail(id: number): Observable<any[]> {
+    const params = { course_id: id.toString() };
+    return this.http.get<any[]>(this.apiUrl2, { params });
   }
 }

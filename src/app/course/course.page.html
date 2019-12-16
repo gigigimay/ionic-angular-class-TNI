@@ -9,7 +9,7 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let c of courses">
+    <ion-item *ngFor="let c of courses" (click)="itemSelected(c)">
       <ion-label>
         <ion-text color="primary">
           <h3>{{c.c_title}}</h3>

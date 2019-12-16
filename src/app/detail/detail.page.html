@@ -1,12 +1,22 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>รายละเอียดคอร์สเรียน</ion-title>
+    <ion-title>{{title}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-list>
+    <ion-item *ngFor="let d of details">
+      <ion-label>
+        <ion-text color="primary">
+          <h3>{{d.ch_title}}</h3>
+        </ion-text>
+        <p>{{d.ch_dateadd}}</p>
+      </ion-label>
+      <ion-badge color="success">{{d.ch_view}}</ion-badge>
+    </ion-item>
+  </ion-list>
 </ion-content>
