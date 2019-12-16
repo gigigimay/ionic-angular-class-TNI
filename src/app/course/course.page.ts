@@ -14,6 +14,7 @@ import { Subscription } from 'rxjs'; // for retreive data and unsubscrib() data
 export class CoursePage implements OnInit, OnDestroy {
 
   courses: Course[]; // declare variable for storing data from backend
+  filteredCourse: Course[];
   sub: Subscription;
 
   // (injection) declare service
@@ -23,17 +24,18 @@ export class CoursePage implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.getCourses();
+  }
+
+  getCourses() {
     // subscribe the data from service
     this.sub = this.courseService.getCourse().subscribe(
       (courses) => {
         // retreive data from backend(courses array) then store it in 'courses' variable
         this.courses = courses;
+        this.filteredCourse = courses;
       }
     );
-  }
-
-  ngOnDestroy() {
-    this.sub.unsubscribe();
   }
 
   itemSelected(c: Course) {
@@ -41,5 +43,17 @@ export class CoursePage implements OnInit, OnDestroy {
       id: c.id,
       title: c.c_title
     }]);
+  }
+
+  onChange(e) {
+    const { value } = e.target;
+    const filter = value.trim();
+    // lung Max's
+    const matchesFilter = new RegExp(filter, 'i');
+    this.filteredCourse = this.courses.filter((c: Course) => matchesFilter.test(c.c_title));
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }
