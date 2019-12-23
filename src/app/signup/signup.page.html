@@ -1,9 +1,57 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
     <ion-title>signup</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
+  <form novalidate #myForm="ngForm">
+    <ion-list>
 
+      <ion-item>
+        <ion-label position="floating">Full Name<ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input ngModel type="text" name="fullname" #fullname="ngModel" required></ion-input>
+      </ion-item>
+      <ion-text color="danger" class="ion-padding" *ngIf="fullname.invalid && (fullname.dirty||fullname.touched)">
+        Please enter name and surname.
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="floating">Email<ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input ngModel type="email" name="email" #email="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+          required></ion-input>
+      </ion-item>
+      <ion-text color="danger" class="ion-padding" *ngIf="email.invalid && (email.dirty||email.touched)">
+        Please enter a valid email
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="floating">Password<ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input ngModel type="password" name="password" #password="ngModel" minlength="3" required></ion-input>
+      </ion-item>
+      <ion-text color="danger" class="ion-padding" *ngIf="password.invalid && (password.dirty||password.touched)">
+        Password must be at least 3 characters long.
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="floating">Confirm Password<ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input ngModel type="password" name="confirmPassword" #confirmPassword="ngModel"
+          pattern="{{ password.value }}" required></ion-input>
+      </ion-item>
+      <ion-text color="danger" class="ion-padding" *ngIf="confirmPassword.invalid && (confirmPassword.dirty||confirmPassword.touched)">
+        Confirm password does not match password
+      </ion-text>
+
+      <ion-button (click)="signup(myForm.value)" expand="full" class="ion-margin-top" [disabled]="myForm.invalid">
+        Create New Account
+      </ion-button>
+    </ion-list>
+  </form>
 </ion-content>
