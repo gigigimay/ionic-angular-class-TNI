@@ -36,6 +36,11 @@ export class AppComponent {
       url: '/news',
       icon: 'paper'
     },
+    {
+      title: 'โน้ต',
+      url: '/note',
+      icon: 'book',
+    },
   ];
 
   constructor(

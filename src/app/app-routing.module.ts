@@ -21,7 +21,8 @@ const routes: Routes = [
   { path: 'news', loadChildren: './news/news.module#NewsPageModule' },
   { path: 'detail', loadChildren: './detail/detail.module#DetailPageModule' },
   { path: 'youtube', loadChildren: './youtube/youtube.module#YoutubePageModule' },
-  { path: 'signup', loadChildren: './signup/signup.module#SignupPageModule' }
+  { path: 'signup', loadChildren: './signup/signup.module#SignupPageModule' },
+  { path: 'note', loadChildren: './note/note.module#NotePageModule' }
 ];
 
 @NgModule({
