@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 
+import { Storage } from '@ionic/storage';
+
 @Component({
   selector: 'app-about',
   templateUrl: './about.page.html',
@@ -8,10 +10,17 @@ import { NavController } from '@ionic/angular';
 })
 export class AboutPage implements OnInit {
 
-  constructor(private navCtrl: NavController) {
+  constructor(
+    private navCtrl: NavController,
+    private storage: Storage,
+  ) {
   }
 
   ngOnInit() {
+    this.storage.ready().then(() => {
+      this.storage.set('phone', '1150');
+    }
+    );
   }
 
   goToContact() {

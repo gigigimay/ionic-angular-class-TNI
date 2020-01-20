@@ -13,6 +13,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabase } from '@angular/fire/database';
 
+import { IonicStorageModule } from '@ionic/storage';
+
 export const firebaseConfig = {
   apiKey: 'AIzaSyAa1eqAbyKC5zsrHyiV4YZXSWZam-EcUBU',
   authDomain: 'ionic-angular-class.firebaseapp.com',
@@ -32,6 +34,7 @@ export const firebaseConfig = {
     AppRoutingModule,
     HttpClientModule,
     AngularFireModule.initializeApp(firebaseConfig),
+    IonicStorageModule.forRoot(),
   ],
   providers: [
     StatusBar,
