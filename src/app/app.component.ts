@@ -41,6 +41,11 @@ export class AppComponent {
       url: '/note',
       icon: 'book',
     },
+    {
+      title: 'ลูกค้า',
+      url: '/customer',
+      icon: 'person',
+    },
   ];
 
   constructor(
