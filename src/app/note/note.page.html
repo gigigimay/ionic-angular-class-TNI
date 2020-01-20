@@ -45,6 +45,13 @@
         </ion-label>
       </ion-item>
 
+      <ion-item-options>
+        <ion-item-option color="danger" (click)="delete(item)">
+          <ion-icon slot="end" name="trash"></ion-icon>
+          Del
+        </ion-item-option>
+      </ion-item-options>
+
     </ion-item-sliding>
   </ion-list>
 </ion-content>

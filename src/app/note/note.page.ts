@@ -65,4 +65,11 @@ export class NotePage implements OnInit {
     this.isAdd = false;
   }
 
+  delete(item) {
+    const { key } = item;
+    this.itemsRef.remove(key);
+    this.isToggle = false;
+    this.isAdd = false;
+  }
+
 }
