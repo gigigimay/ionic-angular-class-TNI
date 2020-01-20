@@ -3,10 +3,48 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Note</ion-title>
+    <ion-title>Note (real time DB)</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button color="{{isAdd ? 'primary' : 'body'}}" (click)="openForm()">
+        <ion-icon slot="start" name="add-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
+  <form novalidate #note="ngForm" *ngIf="isToggle">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Topic</ion-label>
+        <ion-input type="text" [(ngModel)]="topic" name="topic"></ion-input>
+      </ion-item>
 
+      <ion-item>
+        <ion-label position="floating">Due Date</ion-label>
+        <ion-datetime [(ngModel)]="dueDate" type="text" name="dueDate" displayFormat="DD MMM YYYY"></ion-datetime>
+      </ion-item>
+
+      <div class="ion-padding">
+        <ion-button color="{{isAdd ? 'primary' : 'warning'}}" (click)="save(note.value)" [disabled]="!note.form.valid"
+          class="ion-margin-top">
+          {{isAdd ? 'Add Data' : 'Edit'}}
+        </ion-button>
+      </div>
+    </ion-list>
+  </form>
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let item of items | async">
+      <ion-item (click)="select(item)">
+        <ion-label>
+          <ion-text color="primary">
+            <h1>{{item.note.topic}}</h1>
+          </ion-text>
+          <p>{{item.note.dueDate | date: 'dd MMMM yyyy'}}</p>
+        </ion-label>
+      </ion-item>
+
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>
