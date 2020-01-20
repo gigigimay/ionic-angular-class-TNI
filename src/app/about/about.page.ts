@@ -19,8 +19,7 @@ export class AboutPage implements OnInit {
   ngOnInit() {
     this.storage.ready().then(() => {
       this.storage.set('phone', '1150');
-    }
-    );
+    });
   }
 
   goToContact() {
