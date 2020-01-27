@@ -57,8 +57,7 @@ export class CustomerPage implements OnInit {
         .then((res) => {
           this.customers = [];
           for (let i = 0; i < res.rows.length; i++) {
-            const item = res.rows.item(i);
-            const { id, fullname, phone } = item;
+            const { id, fullname, phone } = res.rows.item(i);
             this.customers.push({ id, fullname, phone });
           }
         })
@@ -66,8 +65,8 @@ export class CustomerPage implements OnInit {
     });
   }
 
-  add(form: any) {
-    const { fullname, phone } = form;
+  add(item: any) {
+    const { fullname, phone } = item;
     this.sqlite.create(dataDB).then((db: SQLiteObject) => {
       db.executeSql(SQL_COMMANDS.insert, [fullname, phone])
         .then(async () => {
