@@ -6,9 +6,63 @@
     <ion-title>
       Customer
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="primary" (click)="toggleForm()">
+        <ion-icon slot="icon-only" slot="end" name="person-add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
+  <!-- novalidate is used with "ngForm", myForm is an id -->
+  <form novalidate #myForm="ngForm" *ngIf="isOpen">
+    <ion-list>
 
+      <ion-item>
+        <ion-label position="floating">FullName</ion-label>
+        <ion-input ngModel type="text" name="fullname" #fullname="ngModel" required></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="fullname.invalid && (phone.dirty || phone.touched)">
+        please input fullname
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="floating">Phone</ion-label>
+        <ion-input ngModel type="text" name="phone" #phone="ngModel" required></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="phone.invalid && (phone.dirty || phone.touched)">
+        please input phone number
+      </ion-text>
+
+      <ion-button (click)="add(myForm.value)" class="ion-margin-top" [disabled]="myForm.invalid" size="large"
+        expand="full">
+        Save Data
+      </ion-button>
+
+    </ion-list>
+  </form>
+
+  <ion-list>
+    <ion-item-sliding>
+      <ion-item>
+        <ion-label>
+          <ion-text color="primary">
+            <h1>Eiei</h1>
+          </ion-text>
+          <p>1150</p>
+        </ion-label>
+      </ion-item>
+    </ion-item-sliding>
+    <ion-item-sliding *ngFor="let item of customers">
+      <ion-item>
+        <ion-label>
+          <ion-text color="primary">
+            <h1>{{item.fullname}}</h1>
+          </ion-text>
+          <p>{{item.phone}}</p>
+        </ion-label>
+      </ion-item>
+    </ion-item-sliding>
+  </ion-lis>
 </ion-content>
