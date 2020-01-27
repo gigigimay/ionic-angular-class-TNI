@@ -44,16 +44,6 @@
   </form>
 
   <ion-list>
-    <ion-item-sliding>
-      <ion-item>
-        <ion-label>
-          <ion-text color="primary">
-            <h1>Eiei</h1>
-          </ion-text>
-          <p>1150</p>
-        </ion-label>
-      </ion-item>
-    </ion-item-sliding>
     <ion-item-sliding *ngFor="let item of customers">
       <ion-item>
         <ion-label>
@@ -63,6 +53,12 @@
           <p>{{item.phone}}</p>
         </ion-label>
       </ion-item>
+      <ion-item-options>
+        <ion-item-option color="danger" (click)="delete(item.id)">
+          <ion-icon slot="end" name="trash"></ion-icon>
+          Del
+        </ion-item-option>
+      </ion-item-options>
     </ion-item-sliding>
-  </ion-lis>
+  </ion-list>
 </ion-content>

@@ -7,6 +7,13 @@ const dataDB = {
   location: 'default'
 };
 
+const SQL_COMMANDS = {
+  create: 'CREATE TABLE IF NOT EXISTS Customers(id INTEGER PRIMARY KEY AUTOINCREMENT, fullname TEXT, phone TEXT)',
+  insert: 'INSERT INTO Customers(fullname, phone) VALUES(?,?)',
+  select: 'SELECT * FROM Customers ORDER BY id DESC;',
+  delete: 'DELETE FROM Customers WHERE id=?',
+};
+
 @Component({
   selector: 'app-customer',
   templateUrl: './customer.page.html',
@@ -24,14 +31,15 @@ export class CustomerPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log('customers init!');
     this.isOpen = false;
     this.platform.ready().then(() => {
       // create a db
       this.sqlite.create(dataDB).then((db: SQLiteObject) => {
-        db.executeSql('CREATE TABLE IF NOT EXISTS Customers(id INTEGER PRIMARY KEY AUTOINCREMENT, fullname TEXT, phone TEXT)')
-          .then(() => console.log('Executed SQL'))
-          .catch(e => console.log(e));
-      }).catch(e => console.log(e));
+        db.executeSql(SQL_COMMANDS.create, [])
+          .then(res => console.log('Executed SQL', res))
+          .catch(e => console.error('execution error on CREATE TABLE', e));
+      }).catch(e => console.error('connection error on CREATE TABLE', e));
     });
 
     this.showData();
@@ -45,42 +53,48 @@ export class CustomerPage implements OnInit {
   // and store the data in this.customers
   showData() {
     this.sqlite.create(dataDB).then((db: SQLiteObject) => {
-      db.executeSql('SELECT * FROM Customers ORDER BY id DESC;')
-        .then(async (data) => {
+      db.executeSql(SQL_COMMANDS.select, [])
+        .then((res) => {
           this.customers = [];
-          const { rows } = await data;
-          if (rows) {
-            rows.forEach(d => {
-              this.customers.push(d);
-            });
+          for (let i = 0; i < res.rows.length; i++) {
+            const item = res.rows.item(i);
+            const { id, fullname, phone } = item;
+            this.customers.push({ id, fullname, phone });
           }
-
-          const toast = await this.toastCtrl.create({
-            // message: 'Data inserted.',
-            message: JSON.stringify(data),
-            duration: 3000
-          });
-          toast.present();
         })
-        .catch(e => console.log(e));
+        .catch(e => console.error('error on SELECT sql', e));
     });
   }
 
   add(form: any) {
+    const { fullname, phone } = form;
     this.sqlite.create(dataDB).then((db: SQLiteObject) => {
-      db.executeSql('INSERT INTO Customers(fullname, phone) VALUES(?,?)', [form.fullname, form.phone])
-        .then(async (data) => {
+      db.executeSql(SQL_COMMANDS.insert, [fullname, phone])
+        .then(async () => {
           const toast = await this.toastCtrl.create({
-            // message: 'Data inserted.',
-            message: JSON.stringify(data),
+            message: 'Data inserted.',
             duration: 3000
           });
           toast.present();
           this.showData();
           this.isOpen = false;
         })
-        .catch(e => console.log(e));
-    })
-      .catch();
+        .catch(e => console.error('error on INSERT', e));
+    });
+  }
+
+  delete(id: number) {
+    this.sqlite.create(dataDB).then((db: SQLiteObject) => {
+      db.executeSql(SQL_COMMANDS.delete, [id])
+        .then(async () => {
+          const toast = await this.toastCtrl.create({
+            message: 'Data deleted.',
+            duration: 3000
+          });
+          toast.present();
+          this.showData();
+        })
+        .catch(e => console.error('error on DELETE', e));
+    });
   }
 }
