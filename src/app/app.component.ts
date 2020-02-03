@@ -46,6 +46,11 @@ export class AppComponent {
       url: '/customer',
       icon: 'person',
     },
+    {
+      title: 'กล้อง',
+      url: '/camera',
+      icon: 'camera',
+    },
   ];
 
   constructor(

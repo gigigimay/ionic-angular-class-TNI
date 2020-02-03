@@ -22,7 +22,8 @@ const routes: Routes = [
   { path: 'detail', loadChildren: './detail/detail.module#DetailPageModule' },
   { path: 'youtube', loadChildren: './youtube/youtube.module#YoutubePageModule' },
   { path: 'signup', loadChildren: './signup/signup.module#SignupPageModule' },
-  { path: 'note', loadChildren: './note/note.module#NotePageModule' },  { path: 'customer', loadChildren: './customer/customer.module#CustomerPageModule' }
+  { path: 'note', loadChildren: './note/note.module#NotePageModule' },  { path: 'customer', loadChildren: './customer/customer.module#CustomerPageModule' },
+  { path: 'camera', loadChildren: './camera/camera.module#CameraPageModule' }
 
 ];
 
