@@ -16,6 +16,8 @@ import { SQLite } from '@ionic-native/sqlite/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
+import { Camera } from '@ionic-native/camera/ngx';
+
 export const firebaseConfig = {
   apiKey: 'AIzaSyAa1eqAbyKC5zsrHyiV4YZXSWZam-EcUBU',
   authDomain: 'ionic-angular-class.firebaseapp.com',
@@ -43,6 +45,7 @@ export const firebaseConfig = {
     AngularFireDatabase,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     SQLite,
+    Camera
   ],
   bootstrap: [AppComponent]
 })
