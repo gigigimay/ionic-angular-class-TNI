@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Platform, ToastController } from '@ionic/angular';
+import { Platform, ToastController, AlertController } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 
 const dataDB = {
@@ -28,6 +28,7 @@ export class CustomerPage implements OnInit {
     private sqlite: SQLite,
     private platform: Platform,
     private toastCtrl: ToastController,
+    private alertCtrl: AlertController
   ) { }
 
   ngOnInit() {
@@ -82,18 +83,35 @@ export class CustomerPage implements OnInit {
     });
   }
 
-  delete(id: number) {
-    this.sqlite.create(dataDB).then((db: SQLiteObject) => {
-      db.executeSql(SQL_COMMANDS.delete, [id])
-        .then(async () => {
-          const toast = await this.toastCtrl.create({
-            message: 'Data deleted.',
-            duration: 3000
+  async delete(item: any) {
+    const { id, fullname } = item;
+    const confirm = await this.alertCtrl.create({
+      header: 'Confirm delete?',
+      message: `Are you sure you want to delete [${fullname}]`,
+      buttons: [{ text: 'Cencel', },
+      {
+        text: 'Delete',
+        handler: () => {
+          this.sqlite.create(dataDB).then((db: SQLiteObject) => {
+            db.executeSql(SQL_COMMANDS.delete, [id])
+              .then(async () => {
+                const toast = await this.toastCtrl.create({
+                  message: 'Data deleted.',
+                  duration: 3000
+                });
+                toast.present();
+                this.showData();
+              })
+              .catch(e => console.error('error on DELETE', e));
           });
-          toast.present();
-          this.showData();
-        })
-        .catch(e => console.error('error on DELETE', e));
+        }
+      }]
     });
+    confirm.present();
+  }
+
+  edit(item: any) {
+    const { fullname, phone } = item;
+    this.isOpen = true;
   }
 }
