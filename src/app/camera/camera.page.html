@@ -8,5 +8,12 @@
 </ion-header>
 
 <ion-content>
+  <ion-button (click)="takePictures()" expand="full" color="primary">
+    Take photo!
+  </ion-button>
 
+  <ion-card *ngIf="myImg">
+    <!-- {{myImg}} -->
+    <ion-img [src]="myImg"></ion-img>
+  </ion-card>
 </ion-content>
